@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MateIA v2.1</title>
+<title>MateIA v2.2</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,sans-serif;background:#f1f5ff;color:#182033}
@@ -31,7 +31,7 @@ button:hover{opacity:.9}
 </style>
 </head>
 <body>
-<header><h1>🧠 MateIA</h1><p>Tu profesor de matemáticas con inteligencia artificial</p><strong>⚡ Versión 2.1</strong></header>
+<header><h1>🧠 MateIA</h1><p>Tu profesor de matemáticas con inteligencia artificial</p><strong>⚡ Versión 2.2</strong></header>
 <div class="container">
 <div class="card"><h2>📚 Elige una materia</h2><div class="subjects">
 <div class="subject active" onclick="seleccionarMateria('aritmetica',this)"><div class="icon">➕</div><strong>Aritmética</strong><small>Operaciones y porcentajes</small></div>
@@ -42,6 +42,9 @@ button:hover{opacity:.9}
 <div class="subject" onclick="seleccionarMateria('estadistica',this)"><div class="icon">📊</div><strong>Estadística</strong><small>Media, mediana y rango</small></div>
 <div class="subject" onclick="seleccionarMateria('numeros',this)"><div class="icon">🔢</div><strong>Teoría de números</strong><small>Primos y factorización</small></div>
 <div class="subject" onclick="seleccionarMateria('discretas',this)"><div class="icon">🕸️</div><strong>Discretas</strong><small>Combinatoria</small></div>
+<div class="subject" onclick="seleccionarMateria('matrices',this)"><div class="icon">🧮</div><strong>Matrices</strong><small>Determinantes</small></div>
+<div class="subject" onclick="seleccionarMateria('funciones',this)"><div class="icon">📈</div><strong>Funciones</strong><small>Evaluación</small></div>
+
 </div></div>
 
 <div class="card"><h2>🧠 Pregunta a MateIA</h2><span class="badge" id="materiaActual">Aritmética</span>
@@ -59,13 +62,25 @@ button:hover{opacity:.9}
 <div class="example" onclick="usarEjemplo('factoriza 120')">🔢 factoriza 120</div>
 <div class="example" onclick="usarEjemplo('combinaciones de 5 y 2')">🎲 combinaciones de 5 y 2</div>
 <div class="example" onclick="usarEjemplo('mediana 5, 8, 10, 15')">📊 mediana 5, 8, 10, 15</div>
+<div class="example" onclick="usarEjemplo('x^2 - 5x + 6 = 0')">🟰 x² - 5x + 6 = 0</div>
+<div class="example" onclick="usarEjemplo('area circulo radio 5')">⭕ área círculo radio 5</div>
+<div class="example" onclick="usarEjemplo('det [[1,2],[3,4]]')">🧮 det [[1,2],[3,4]]</div>
+<div class="example" onclick="usarEjemplo('f(x)=2x+3, x=5')">📈 f(x)=2x+3, x=5</div>
+<div class="example" onclick="usarEjemplo('integral x^2')">∫ integral x²</div>
+
 </div></div>
 
 <div class="card" id="resultado"><h2>💡 Solución de MateIA</h2><div class="resultado-box" id="contenidoResultado"></div></div>
-<div class="card"><h2>🚀 MateIA v2.1</h2>
+<div class="card"><h2>🚀 MateIA v2.2</h2>
 <div class="paso">✅ Aritmética y porcentajes</div><div class="paso">✅ Fracciones</div><div class="paso">✅ Potencias y raíces</div><div class="paso">✅ Trigonometría básica</div><div class="paso">✅ Ecuaciones y sistemas</div><div class="paso">✅ Combinatoria</div><div class="paso">✅ Estadística</div><div class="paso">✅ Primos y factorización</div><div class="paso">🚀 Preparada para futuras funciones de IA</div>
+<div class="paso">🧮 Matrices 2×2 y determinantes</div>
+<div class="paso">🟰 Ecuaciones cuadráticas</div>
+<div class="paso">📐 Geometría: áreas, perímetros y volumen</div>
+<div class="paso">📈 Funciones y evaluación</div>
+<div class="paso">∫ Integrales polinómicas básicas</div>
+
 </div>
-<div class="status">🟢 MateIA v2.1 está funcionando</div>
+<div class="status">🟢 MateIA v2.2 está funcionando</div>
 </div>
 <footer>MateIA © 2026 · Tu profesor de matemáticas</footer>
 
@@ -73,7 +88,7 @@ button:hover{opacity:.9}
 let materia="aritmetica";
 function seleccionarMateria(nombre,elemento){
  materia=nombre;document.querySelectorAll(".subject").forEach(s=>s.classList.remove("active"));elemento.classList.add("active");
- const nombres={aritmetica:"Aritmética",algebra:"Álgebra",geometria:"Geometría",calculo:"Cálculo",probabilidad:"Probabilidad",estadistica:"Estadística",numeros:"Teoría de números",discretas:"Matemáticas discretas"};
+ const nombres={aritmetica:"Aritmética",algebra:"Álgebra",geometria:"Geometría",calculo:"Cálculo",probabilidad:"Probabilidad",estadistica:"Estadística",numeros:"Teoría de números",discretas:"Matemáticas discretas",matrices:"Matrices",funciones:"Funciones"};
  document.getElementById("materiaActual").textContent=nombres[nombre];
 }
 function usarEjemplo(t){document.getElementById("problema").value=t;document.getElementById("problema").scrollIntoView({behavior:"smooth",block:"center"})}
@@ -126,7 +141,38 @@ function resolver(){
 
  try{if(/^[0-9+\-*/().\s]+$/.test(t)){let r=Function('"use strict";return('+t+')')();if(Number.isFinite(r)){mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Aritmética</div><div class="final">✅ Resultado = ${r}</div>`);return}}}catch(e){}
 
- mostrarResultado('<div class="paso">🤔 Todavía no reconozco completamente este problema.</div><div class="paso">Prueba: √144, 2^8, seno 30, factoriza 120, combinaciones de 5 y 2, mediana 5, 8, 10, 15 o 3x + 5 = 20.</div><div class="final">🚀 MateIA v2.1 sigue creciendo</div>');
+
+ /* ===== MateIA v2.2 ===== */
+ let q=t.replace(/\s/g,"").match(/^(-?\d*\.?\d*)x\^2([+-]\d*\.?\d*)x([+-]\d*\.?\d*)=0$/);
+ if(q){
+   let a=q[1]===""||q[1]=="+"?1:q[1]=="-"?-1:+q[1], b=+q[2], c=+q[3], D=b*b-4*a*c;
+   if(D>=0){
+     let x1=(-b+Math.sqrt(D))/(2*a), x2=(-b-Math.sqrt(D))/(2*a);
+     mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Ecuaciones cuadráticas</div><div class="paso">Discriminante D = ${D}</div><div class="paso">x = (−b ± √D) / 2a</div><div class="final">✅ x₁ = ${x1}<br>✅ x₂ = ${x2}</div>`); return;
+   }
+   let real=-b/(2*a), imag=Math.sqrt(-D)/(2*a);
+   mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Ecuaciones cuadráticas</div><div class="paso">D = ${D} &lt; 0: no hay soluciones reales.</div><div class="final">✅ x₁ = ${real} + ${Math.abs(imag)}i<br>✅ x₂ = ${real} − ${Math.abs(imag)}i</div>`); return;
+ }
+
+ let g=t.match(/(?:area|área)\s+(?:de\s+)?(?:un\s+)?(circulo|círculo)\s+(?:radio\s*)?(\d+(?:\.\d+)?)/);
+ if(g){let r=+g[2],A=Math.PI*r*r;mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Geometría</div><div class="paso">A = πr² = π × ${r}²</div><div class="final">✅ Área ≈ ${A.toFixed(4)}</div>`);return}
+
+ g=t.match(/(?:perimetro|perímetro)\s+(?:de\s+un\s+)?(?:cuadrado\s+)?(?:lado\s*)?(\d+(?:\.\d+)?)/);
+ if(g){let l=+g[1],p=4*l;mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Geometría</div><div class="paso">P = 4l = 4 × ${l}</div><div class="final">✅ Perímetro = ${p}</div>`);return}
+
+ g=t.match(/volumen\s+(?:de\s+un\s+)?(?:cubo\s+)?(?:lado\s*)?(\d+(?:\.\d+)?)/);
+ if(g){let l=+g[1],v=l**3;mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Geometría</div><div class="paso">V = l³ = ${l}³</div><div class="final">✅ Volumen = ${v}</div>`);return}
+
+ let det=t.match(/det(?:erminante)?\s*\[\[\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*\]\s*,\s*\[\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*\]\s*\]/);
+ if(det){let a=+det[1],b=+det[2],c=+det[3],d=+det[4],r=a*d-b*c;mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Matrices</div><div class="paso">det(M) = ad − bc = (${a}×${d}) − (${b}×${c})</div><div class="final">✅ det(M) = ${r}</div>`);return}
+
+ let fun=t.match(/f\(x\)\s*=\s*(-?\d+(?:\.\d+)?)x\s*([+-])\s*(\d+(?:\.\d+)?).*x\s*=\s*(-?\d+(?:\.\d+)?)/);
+ if(fun){let a=+fun[1],b=(fun[2]=="-"?-1:1)*+fun[3],x=+fun[4],y=a*x+b;mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Funciones</div><div class="paso">f(x) = ${a}x ${b>=0?"+":"−"} ${Math.abs(b)}<br>x = ${x}</div><div class="final">✅ f(${x}) = ${y}</div>`);return}
+
+ let integ=t.match(/integral\s*x\^(\d+)/);
+ if(integ){let n=+integ[1],k=n+1;mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Cálculo integral</div><div class="paso">Regla: ∫xⁿ dx = xⁿ⁺¹/(n+1) + C</div><div class="final">✅ ∫x^${n} dx = x^${k}/${k} + C</div>`);return}
+
+ mostrarResultado('<div class="paso">🤔 Todavía no reconozco completamente este problema.</div><div class="paso">Prueba: √144, 2^8, seno 30, factoriza 120, combinaciones de 5 y 2, mediana 5, 8, 10, 15 o 3x + 5 = 20.</div><div class="final">🚀 MateIA v2.2 sigue creciendo</div>');
 }
 </script>
 </body>
