@@ -63,6 +63,8 @@ button:hover{opacity:.9}
 <div class="example" onclick="usarEjemplo('combinaciones de 5 y 2')">🎲 combinaciones de 5 y 2</div>
 <div class="example" onclick="usarEjemplo('mediana 5, 8, 10, 15')">📊 mediana 5, 8, 10, 15</div>
 <div class="example" onclick="usarEjemplo('x^2 - 5x + 6 = 0')">🟰 x² - 5x + 6 = 0</div>
+<div class="example" onclick="usarEjemplo('x^2 - 5x + 6')">🧠 x² − 5x + 6</div>
+
 <div class="example" onclick="usarEjemplo('area circulo radio 5')">⭕ área círculo radio 5</div>
 <div class="example" onclick="usarEjemplo('det [[1,2],[3,4]]')">🧮 det [[1,2],[3,4]]</div>
 <div class="example" onclick="usarEjemplo('f(x)=2x+3, x=5')">📈 f(x)=2x+3, x=5</div>
@@ -143,7 +145,7 @@ function resolver(){
 
 
  /* ===== MateIA v2.2 ===== */
- let q=t.replace(/\s/g,"").match(/^(-?\d*\.?\d*)x\^2([+-]\d*\.?\d*)x([+-]\d*\.?\d*)=0$/);
+ let q=t.replace(/\s/g,"").match(/^(-?\d*\.?\d*)x\^2([+-]\d*\.?\d*)x([+-]\d*\.?\d*)(?:=0)?$/);
  if(q){
    let a=q[1]===""||q[1]=="+"?1:q[1]=="-"?-1:+q[1], b=+q[2], c=+q[3], D=b*b-4*a*c;
    if(D>=0){
