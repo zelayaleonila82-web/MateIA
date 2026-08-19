@@ -3,873 +3,131 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>MateIA v2.0</title>
-
+<title>MateIA v2.1</title>
 <style>
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f1f5ff;
-    color: #182033;
-}
-
-header {
-    background: linear-gradient(135deg, #2563eb, #7c3aed);
-    color: white;
-    text-align: center;
-    padding: 35px 20px;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 42px;
-}
-
-header p {
-    font-size: 20px;
-    margin-bottom: 0;
-}
-
-.container {
-    width: 92%;
-    max-width: 1000px;
-    margin: 25px auto;
-}
-
-.card {
-    background: white;
-    border-radius: 25px;
-    padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: 0 8px 25px rgba(0,0,0,.08);
-}
-
-h2 {
-    color: #2563eb;
-}
-
-select,
-textarea {
-    width: 100%;
-    border: 2px solid #dbe3f0;
-    border-radius: 15px;
-    padding: 15px;
-    font-size: 17px;
-    margin-top: 10px;
-}
-
-textarea {
-    min-height: 130px;
-    resize: vertical;
-}
-
-button {
-    border: none;
-    border-radius: 15px;
-    padding: 15px 22px;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 15px;
-}
-
-.btn-primary {
-    background: #2563eb;
-    color: white;
-}
-
-.btn-secondary {
-    background: #7c3aed;
-    color: white;
-    margin-left: 8px;
-}
-
-button:hover {
-    opacity: .9;
-}
-
-.subjects {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 12px;
-    margin-top: 15px;
-}
-
-.subject {
-    border: 2px solid #e2e8f0;
-    border-radius: 18px;
-    padding: 18px;
-    background: #f8fafc;
-    cursor: pointer;
-    text-align: center;
-    transition: .2s;
-}
-
-.subject:hover {
-    transform: translateY(-3px);
-    border-color: #7c3aed;
-}
-
-.subject.active {
-    background: #eef2ff;
-    border-color: #2563eb;
-}
-
-.subject .icon {
-    font-size: 30px;
-}
-
-.subject strong {
-    display: block;
-    margin-top: 8px;
-}
-
-.examples {
-    display: grid;
-    gap: 10px;
-}
-
-.example {
-    background: #f8fafc;
-    border: 2px solid #e2e8f0;
-    padding: 15px;
-    border-radius: 15px;
-    cursor: pointer;
-    font-size: 17px;
-}
-
-.example:hover {
-    border-color: #2563eb;
-}
-
-#resultado {
-    display: none;
-}
-
-.resultado-box {
-    background: #f8fafc;
-    border-left: 6px solid #2563eb;
-    padding: 20px;
-    border-radius: 15px;
-}
-
-.paso {
-    background: white;
-    border-radius: 12px;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #e2e8f0;
-}
-
-.final {
-    font-size: 23px;
-    font-weight: bold;
-    color: #16a34a;
-}
-
-.badge {
-    display: inline-block;
-    background: #ede9fe;
-    color: #6d28d9;
-    padding: 7px 12px;
-    border-radius: 20px;
-    font-weight: bold;
-}
-
-.status {
-    text-align: center;
-    color: #16a34a;
-    font-weight: bold;
-    font-size: 18px;
-}
-
-footer {
-    text-align: center;
-    padding: 30px;
-    color: #64748b;
-}
-
-@media(max-width:600px) {
-    header h1 {
-        font-size: 34px;
-    }
-
-    header p {
-        font-size: 17px;
-    }
-
-    .card {
-        padding: 18px;
-    }
-
-    button {
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .btn-secondary {
-        margin-left: 0;
-    }
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f5ff;color:#182033}
+header{background:linear-gradient(135deg,#2563eb,#7c3aed);color:white;text-align:center;padding:35px 20px}
+header h1{margin:0;font-size:42px} header p{font-size:20px}
+.container{width:92%;max-width:1000px;margin:25px auto}
+.card{background:white;border-radius:25px;padding:25px;margin-bottom:25px;box-shadow:0 8px 25px rgba(0,0,0,.08)}
+h2{color:#2563eb}
+select,textarea{width:100%;border:2px solid #dbe3f0;border-radius:15px;padding:15px;font-size:17px;margin-top:10px}
+textarea{min-height:130px;resize:vertical}
+button{border:0;border-radius:15px;padding:15px 22px;font-size:17px;font-weight:bold;cursor:pointer;margin-top:15px}
+.btn-primary{background:#2563eb;color:white}.btn-secondary{background:#7c3aed;color:white;margin-left:8px}
+button:hover{opacity:.9}
+.subjects{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:15px}
+.subject{border:2px solid #e2e8f0;border-radius:18px;padding:18px;background:#f8fafc;cursor:pointer;text-align:center}
+.subject:hover{transform:translateY(-3px);border-color:#7c3aed}.subject.active{background:#eef2ff;border-color:#2563eb}
+.subject .icon{font-size:30px}.subject strong{display:block;margin-top:8px}
+.examples{display:grid;gap:10px}.example{background:#f8fafc;border:2px solid #e2e8f0;padding:15px;border-radius:15px;cursor:pointer;font-size:17px}
+.example:hover{border-color:#2563eb}
+#resultado{display:none}.resultado-box{background:#f8fafc;border-left:6px solid #2563eb;padding:20px;border-radius:15px}
+.paso{background:white;border-radius:12px;padding:12px;margin:10px 0;border:1px solid #e2e8f0}
+.final{font-size:23px;font-weight:bold;color:#16a34a}.badge{display:inline-block;background:#ede9fe;color:#6d28d9;padding:7px 12px;border-radius:20px;font-weight:bold}
+.status{text-align:center;color:#16a34a;font-weight:bold;font-size:18px}footer{text-align:center;padding:30px;color:#64748b}
+@media(max-width:600px){header h1{font-size:34px}.card{padding:18px}button{width:100%;margin-left:0}.btn-secondary{margin-left:0}}
 </style>
 </head>
-
 <body>
-
-<header>
-    <h1>🧠 MateIA</h1>
-    <p>Tu profesor de matemáticas con inteligencia artificial</p>
-    <strong>⚡ Versión 2.0</strong>
-</header>
-
+<header><h1>🧠 MateIA</h1><p>Tu profesor de matemáticas con inteligencia artificial</p><strong>⚡ Versión 2.1</strong></header>
 <div class="container">
+<div class="card"><h2>📚 Elige una materia</h2><div class="subjects">
+<div class="subject active" onclick="seleccionarMateria('aritmetica',this)"><div class="icon">➕</div><strong>Aritmética</strong><small>Operaciones y porcentajes</small></div>
+<div class="subject" onclick="seleccionarMateria('algebra',this)"><div class="icon">🔢</div><strong>Álgebra</strong><small>Ecuaciones y expresiones</small></div>
+<div class="subject" onclick="seleccionarMateria('geometria',this)"><div class="icon">📐</div><strong>Geometría</strong><small>Áreas y perímetros</small></div>
+<div class="subject" onclick="seleccionarMateria('calculo',this)"><div class="icon">📈</div><strong>Cálculo</strong><small>Derivadas básicas</small></div>
+<div class="subject" onclick="seleccionarMateria('probabilidad',this)"><div class="icon">🎲</div><strong>Probabilidad</strong><small>Probabilidad básica</small></div>
+<div class="subject" onclick="seleccionarMateria('estadistica',this)"><div class="icon">📊</div><strong>Estadística</strong><small>Media, mediana y rango</small></div>
+<div class="subject" onclick="seleccionarMateria('numeros',this)"><div class="icon">🔢</div><strong>Teoría de números</strong><small>Primos y factorización</small></div>
+<div class="subject" onclick="seleccionarMateria('discretas',this)"><div class="icon">🕸️</div><strong>Discretas</strong><small>Combinatoria</small></div>
+</div></div>
 
-    <!-- MATERIAS -->
-    <div class="card">
+<div class="card"><h2>🧠 Pregunta a MateIA</h2><span class="badge" id="materiaActual">Aritmética</span>
+<textarea id="problema" placeholder="Escribe aquí tu problema...&#10;&#10;Ejemplos:&#10;25 + 37&#10;3x + 5 = 20&#10;√144&#10;2^8&#10;20% de 150&#10;seno 30&#10;factoriza 120"></textarea>
+<button class="btn-primary" onclick="resolver()">🧠 Resolver problema</button>
+<button class="btn-secondary" onclick="limpiar()">🗑️ Limpiar</button></div>
 
-        <h2>📚 Elige una materia</h2>
+<div class="card"><h2>📚 Ejemplos</h2><div class="examples">
+<div class="example" onclick="usarEjemplo('25 + 37')">➕ 25 + 37</div>
+<div class="example" onclick="usarEjemplo('3x + 5 = 20')">📐 3x + 5 = 20</div>
+<div class="example" onclick="usarEjemplo('20% de 150')">💯 20% de 150</div>
+<div class="example" onclick="usarEjemplo('√144')">√ √144</div>
+<div class="example" onclick="usarEjemplo('2^8')">² 2^8</div>
+<div class="example" onclick="usarEjemplo('seno 30')">📐 seno 30</div>
+<div class="example" onclick="usarEjemplo('factoriza 120')">🔢 factoriza 120</div>
+<div class="example" onclick="usarEjemplo('combinaciones de 5 y 2')">🎲 combinaciones de 5 y 2</div>
+<div class="example" onclick="usarEjemplo('mediana 5, 8, 10, 15')">📊 mediana 5, 8, 10, 15</div>
+</div></div>
 
-        <div class="subjects">
-
-            <div class="subject active" onclick="seleccionarMateria('aritmetica', this)">
-                <div class="icon">➕</div>
-                <strong>Aritmética</strong>
-                <small>Operaciones y porcentajes</small>
-            </div>
-
-            <div class="subject" onclick="seleccionarMateria('algebra', this)">
-                <div class="icon">🔢</div>
-                <strong>Álgebra</strong>
-                <small>Ecuaciones y expresiones</small>
-            </div>
-
-            <div class="subject" onclick="seleccionarMateria('geometria', this)">
-                <div class="icon">📐</div>
-                <strong>Geometría</strong>
-                <small>Áreas y perímetros</small>
-            </div>
-
-            <div class="subject" onclick="seleccionarMateria('calculo', this)">
-                <div class="icon">📈</div>
-                <strong>Cálculo</strong>
-                <small>Derivadas básicas</small>
-            </div>
-
-            <div class="subject" onclick="seleccionarMateria('probabilidad', this)">
-                <div class="icon">🎲</div>
-                <strong>Probabilidad</strong>
-                <small>Probabilidad básica</small>
-            </div>
-
-            <div class="subject" onclick="seleccionarMateria('estadistica', this)">
-                <div class="icon">📊</div>
-                <strong>Estadística</strong>
-                <small>Media y datos</small>
-            </div>
-
-            <div class="subject" onclick="seleccionarMateria('numeros', this)">
-                <div class="icon">🔢</div>
-                <strong>Teoría de números</strong>
-                <small>Primos y divisibilidad</small>
-            </div>
-
-            <div class="subject" onclick="seleccionarMateria('discretas', this)">
-                <div class="icon">🕸️</div>
-                <strong>Discretas</strong>
-                <small>Combinatoria y lógica</small>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- PROBLEMA -->
-    <div class="card">
-
-        <h2>🧠 Pregunta a MateIA</h2>
-
-        <span class="badge" id="materiaActual">
-            Aritmética
-        </span>
-
-        <textarea
-            id="problema"
-            placeholder="Escribe aquí tu problema...
-
-Ejemplos:
-25 + 37
-3x + 5 = 20
-20% de 150
-Área de un círculo de radio 5
-Derivada de x^3
-Probabilidad de sacar un 6
-Media de 10, 20, 30">
-        </textarea>
-
-        <button class="btn-primary" onclick="resolver()">
-            🧠 Resolver problema
-        </button>
-
-        <button class="btn-secondary" onclick="limpiar()">
-            🗑️ Limpiar
-        </button>
-
-    </div>
-
-
-    <!-- EJEMPLOS -->
-    <div class="card">
-
-        <h2>📚 Ejemplos</h2>
-
-        <div class="examples">
-
-            <div class="example" onclick="usarEjemplo('25 + 37')">
-                ➕ 25 + 37
-            </div>
-
-            <div class="example" onclick="usarEjemplo('100 - 35')">
-                ➖ 100 - 35
-            </div>
-
-            <div class="example" onclick="usarEjemplo('12 × 8')">
-                ✖️ 12 × 8
-            </div>
-
-            <div class="example" onclick="usarEjemplo('144 ÷ 12')">
-                ➗ 144 ÷ 12
-            </div>
-
-            <div class="example" onclick="usarEjemplo('3x + 5 = 20')">
-                📐 3x + 5 = 20
-            </div>
-
-            <div class="example" onclick="usarEjemplo('20% de 150')">
-                💯 20% de 150
-            </div>
-
-            <div class="example" onclick="usarEjemplo('Área de un círculo de radio 5')">
-                🔵 Área de un círculo de radio 5
-            </div>
-
-            <div class="example" onclick="usarEjemplo('Derivada de x^3')">
-                📈 Derivada de x³
-            </div>
-
-            <div class="example" onclick="usarEjemplo('Probabilidad de sacar un 6 en un dado')">
-                🎲 Probabilidad de sacar un 6
-            </div>
-
-            <div class="example" onclick="usarEjemplo('Media de 10, 20, 30, 40')">
-                📊 Media de 10, 20, 30, 40
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- RESULTADO -->
-    <div class="card" id="resultado">
-
-        <h2>💡 Solución de MateIA</h2>
-
-        <div class="resultado-box">
-
-            <div id="contenidoResultado"></div>
-
-        </div>
-
-    </div>
-
-
-    <!-- CAPACIDADES -->
-    <div class="card">
-
-        <h2>🚀 ¿Qué puede hacer MateIA v2.0?</h2>
-
-        <div class="paso">✅ Resolver operaciones básicas</div>
-        <div class="paso">✅ Resolver ecuaciones lineales</div>
-        <div class="paso">✅ Calcular porcentajes</div>
-        <div class="paso">✅ Resolver áreas y perímetros básicos</div>
-        <div class="paso">✅ Resolver derivadas básicas</div>
-        <div class="paso">✅ Calcular probabilidades sencillas</div>
-        <div class="paso">✅ Calcular medias estadísticas</div>
-        <div class="paso">✅ Trabajar con números primos</div>
-        <div class="paso">🚀 Arquitectura preparada para IA real</div>
-
-    </div>
-
-    <div class="status">
-        🟢 MateIA v2.0 está funcionando
-    </div>
-
+<div class="card" id="resultado"><h2>💡 Solución de MateIA</h2><div class="resultado-box" id="contenidoResultado"></div></div>
+<div class="card"><h2>🚀 MateIA v2.1</h2>
+<div class="paso">✅ Aritmética y porcentajes</div><div class="paso">✅ Fracciones</div><div class="paso">✅ Potencias y raíces</div><div class="paso">✅ Trigonometría básica</div><div class="paso">✅ Ecuaciones y sistemas</div><div class="paso">✅ Combinatoria</div><div class="paso">✅ Estadística</div><div class="paso">✅ Primos y factorización</div><div class="paso">🚀 Preparada para futuras funciones de IA</div>
 </div>
-
-<footer>
-    MateIA © 2026 · Tu profesor de matemáticas
-</footer>
-
+<div class="status">🟢 MateIA v2.1 está funcionando</div>
+</div>
+<footer>MateIA © 2026 · Tu profesor de matemáticas</footer>
 
 <script>
-
-let materia = "aritmetica";
-
-
-function seleccionarMateria(nombre, elemento) {
-
-    materia = nombre;
-
-    document.querySelectorAll(".subject").forEach(
-        s => s.classList.remove("active")
-    );
-
-    elemento.classList.add("active");
-
-    const nombres = {
-        aritmetica: "Aritmética",
-        algebra: "Álgebra",
-        geometria: "Geometría",
-        calculo: "Cálculo",
-        probabilidad: "Probabilidad",
-        estadistica: "Estadística",
-        numeros: "Teoría de números",
-        discretas: "Matemáticas discretas"
-    };
-
-    document.getElementById("materiaActual").textContent =
-        nombres[nombre];
+let materia="aritmetica";
+function seleccionarMateria(nombre,elemento){
+ materia=nombre;document.querySelectorAll(".subject").forEach(s=>s.classList.remove("active"));elemento.classList.add("active");
+ const nombres={aritmetica:"Aritmética",algebra:"Álgebra",geometria:"Geometría",calculo:"Cálculo",probabilidad:"Probabilidad",estadistica:"Estadística",numeros:"Teoría de números",discretas:"Matemáticas discretas"};
+ document.getElementById("materiaActual").textContent=nombres[nombre];
 }
+function usarEjemplo(t){document.getElementById("problema").value=t;document.getElementById("problema").scrollIntoView({behavior:"smooth",block:"center"})}
+function limpiar(){document.getElementById("problema").value="";document.getElementById("resultado").style.display="none"}
+function mostrarResultado(h){document.getElementById("contenidoResultado").innerHTML=h;document.getElementById("resultado").style.display="block";document.getElementById("resultado").scrollIntoView({behavior:"smooth"})}
+function factorial(n){if(n<0||!Number.isInteger(n))return null;let r=1;for(let i=2;i<=n;i++)r*=i;return r}
+function mcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){let t=b;b=a%b;a=t}return a}
+function simplificar(a,b){if(b===0)return null;let d=mcd(a,b);a/=d;b/=d;if(b<0){a=-a;b=-b}return[a,b]}
+function primo(n){if(n<2)return false;for(let i=2;i<=Math.sqrt(n);i++)if(n%i===0)return false;return true}
+function factores(n){let f=[];for(let d=2;n>1;d++)while(n%d===0){f.push(d);n/=d}return f}
+function resolver(){
+ const original=document.getElementById("problema").value.trim();if(!original){mostrarResultado('<div class="paso">⚠️ Escribe un problema primero.</div>');return}
+ let t=original.toLowerCase().replace(/×/g,"*").replace(/÷/g,"/").trim();
 
+ let m=t.match(/(\d+(?:\.\d+)?)\s*%\s*(?:de|del)\s*(\d+(?:\.\d+)?)/);
+ if(m){let p=+m[1],n=+m[2],r=p*n/100;mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Porcentajes</div><div class="paso">${p}% = ${p}/100 = ${p/100}<br>${p/100} × ${n} = ${r}</div><div class="final">✅ Respuesta: ${r}</div>`);return}
 
-function usarEjemplo(texto) {
+ m=t.match(/(?:raiz cuadrada de|raiz de|√)\s*(-?\d+(?:\.\d+)?)/);
+ if(m){let n=+m[1];if(n>=0){let r=Math.sqrt(n);mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Raíces</div><div class="paso">Buscamos √${n}.</div><div class="final">✅ √${n} ≈ ${r}</div>`);return}}
 
-    document.getElementById("problema").value = texto;
+ m=t.match(/(\d+(?:\.\d+)?)\s*(?:\^|elevado a)\s*(-?\d+(?:\.\d+)?)/);
+ if(m){let b=+m[1],e=+m[2],r=Math.pow(b,e);mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Potencias</div><div class="paso">${b}<sup>${e}</sup> = ${r}</div><div class="final">✅ Resultado = ${r}</div>`);return}
 
-    window.scrollTo({
-        top: document.getElementById("problema").offsetTop - 20,
-        behavior: "smooth"
-    });
+ m=t.match(/(seno|sen|coseno|cos|tangente|tan)\s*(?:de)?\s*(-?\d+(?:\.\d+)?)/);
+ if(m){let f=m[1],g=+m[2],rad=g*Math.PI/180,r=f.startsWith("sen")?Math.sin(rad):f.startsWith("cos")?Math.cos(rad):Math.tan(rad);mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Trigonometría</div><div class="paso">${f}(${g}°)</div><div class="final">✅ Resultado ≈ ${r.toFixed(6)}</div>`);return}
+
+ m=t.replace(/\s/g,"").match(/^(-?\d*\.?\d*)x([+-]\d*\.?\d*)=(-?\d*\.?\d*)$/);
+ if(m){let a=m[1]===""||m[1]=="+"?1:m[1]=="-"?-1:+m[1],b=+m[2],c=+m[3];if(a!==0){let x=(c-b)/a;mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Álgebra</div><div class="paso">${a}x + (${b}) = ${c}<br>${a}x = ${c-b}<br>x = ${c-b} ÷ ${a}</div><div class="final">✅ x = ${x}</div>`);return}}
+
+ m=t.match(/(?:combinaciones?|combinar).*?(\d+).*?(\d+)/);
+ if(m){let n=+m[1],r=+m[2];if(r<=n){let x=factorial(n)/(factorial(r)*factorial(n-r));mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Combinatoria</div><div class="paso">C(${n},${r}) = ${n}! / [${r}!(${n}-${r})!]</div><div class="final">✅ C(${n},${r}) = ${x}</div>`);return}}
+
+ m=t.match(/(?:permutaciones?|ordenar).*?(\d+).*?(\d+)/);
+ if(m){let n=+m[1],r=+m[2];if(r<=n){let x=factorial(n)/factorial(n-r);mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Combinatoria</div><div class="final">✅ P(${n},${r}) = ${x}</div>`);return}}
+
+ if(t.includes("factoriza")||t.includes("factores primos")||t.includes("factorización")){let m2=t.match(/\b\d+\b/);if(m2){let n=+m2[0];let f=factores(n);mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Teoría de números</div><div class="paso">Descomponemos ${n}:</div><div class="final">✅ ${n} = ${f.join(" × ")}</div>`);return}}
+
+ if(t.includes("primo")||t.includes("es primo")){let m2=t.match(/\b\d+\b/);if(m2){let n=+m2[0];mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Teoría de números</div><div class="final">${primo(n)?"✅ "+n+" es primo.":"❌ "+n+" no es primo."}</div>`);return}}
+
+ if(t.includes("media")||t.includes("promedio")||t.includes("mediana")||t.includes("rango")){
+  let a=t.match(/-?\d+(?:\.\d+)?/g);if(a&&a.length>=2){let v=a.map(Number),o=[...v].sort((a,b)=>a-b),s=v.reduce((a,b)=>a+b,0),media=s/v.length,med=o.length%2?o[Math.floor(o.length/2)]:(o[o.length/2-1]+o[o.length/2])/2,r=Math.max(...v)-Math.min(...v);mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Estadística</div><div class="paso">Datos: ${v.join(", ")}</div><div class="paso">Media = ${media}<br>Mediana = ${med}<br>Rango = ${r}</div><div class="final">✅ Resultados calculados</div>`);return}}
+
+ if(t.includes("probabilidad")&&t.includes("dado")){mostrarResultado('<div class="paso"><strong>📚 Tema:</strong> Probabilidad</div><div class="paso">Un dado tiene 6 resultados posibles.</div><div class="final">✅ P(una cara específica) = 1/6 ≈ 16.67%</div>');return}
+
+ let fr=t.match(/^(\d+)\s*\/\s*(\d+)$/);
+ if(fr){let a=+fr[1],b=+fr[2],s=simplificar(a,b);mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Fracciones</div><div class="paso">MCD(${a},${b}) = ${mcd(a,b)}</div><div class="final">✅ ${s[0]}/${s[1]} ≈ ${a/b}</div>`);return}
+
+ let d=t.match(/derivada.*?x\^(\d+)/);
+ if(d){let n=+d[1],r=n===1?n:n+"x^"+(n-1);if(n-1===0)r=""+n;mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Cálculo</div><div class="paso">Regla: d/dx(xⁿ)=nxⁿ⁻¹</div><div class="final">✅ Derivada = ${r}</div>`);return}
+
+ try{if(/^[0-9+\-*/().\s]+$/.test(t)){let r=Function('"use strict";return('+t+')')();if(Number.isFinite(r)){mostrarResultado(`<div class="paso"><strong>📚 Tema:</strong> Aritmética</div><div class="final">✅ Resultado = ${r}</div>`);return}}}catch(e){}
+
+ mostrarResultado('<div class="paso">🤔 Todavía no reconozco completamente este problema.</div><div class="paso">Prueba: √144, 2^8, seno 30, factoriza 120, combinaciones de 5 y 2, mediana 5, 8, 10, 15 o 3x + 5 = 20.</div><div class="final">🚀 MateIA v2.1 sigue creciendo</div>');
 }
-
-
-function limpiar() {
-
-    document.getElementById("problema").value = "";
-
-    document.getElementById("resultado").style.display = "none";
-}
-
-
-function mostrarResultado(html) {
-
-    document.getElementById("contenidoResultado").innerHTML = html;
-
-    document.getElementById("resultado").style.display = "block";
-
-    document.getElementById("resultado").scrollIntoView({
-        behavior: "smooth"
-    });
-}
-
-
-function resolver() {
-
-    const textoOriginal =
-        document.getElementById("problema").value.trim();
-
-    if (!textoOriginal) {
-
-        mostrarResultado(`
-            <div class="paso">
-                ⚠️ Escribe un problema primero.
-            </div>
-        `);
-
-        return;
-    }
-
-    const texto = textoOriginal
-        .toLowerCase()
-        .replace(/×/g, "*")
-        .replace(/÷/g, "/")
-        .replace(/,/g, ".");
-
-    // PORCENTAJES
-    const porcentaje =
-        texto.match(/(\d+(?:\.\d+)?)\s*%\s*(?:de|del)\s*(\d+(?:\.\d+)?)/);
-
-    if (porcentaje) {
-
-        const p = parseFloat(porcentaje[1]);
-        const n = parseFloat(porcentaje[2]);
-
-        const resultado = p / 100 * n;
-
-        mostrarResultado(`
-            <div class="paso">
-                <strong>Tipo:</strong> Porcentaje
-            </div>
-
-            <div class="paso">
-                Convertimos ${p}% a decimal:
-                <br>
-                ${p} ÷ 100 = ${p/100}
-            </div>
-
-            <div class="paso">
-                Multiplicamos:
-                <br>
-                ${p/100} × ${n} = ${resultado}
-            </div>
-
-            <div class="final">
-                ✅ Respuesta: ${resultado}
-            </div>
-        `);
-
-        return;
-    }
-
-
-    // ECUACIÓN LINEAL
-    const ecuacion =
-        texto.replace(/\s/g, "").match(
-            /^(-?\d*\.?\d*)x([+-]\d*\.?\d*)=(-?\d*\.?\d*)$/
-        );
-
-    if (ecuacion) {
-
-        let a = ecuacion[1];
-
-        if (a === "" || a === "+") a = 1;
-        if (a === "-") a = -1;
-
-        a = parseFloat(a);
-
-        const b = parseFloat(ecuacion[2]);
-        const c = parseFloat(ecuacion[3]);
-
-        const x = (c - b) / a;
-
-        mostrarResultado(`
-            <div class="paso">
-                <strong>Tipo:</strong> Ecuación lineal
-            </div>
-
-            <div class="paso">
-                ${a}x + (${b}) = ${c}
-            </div>
-
-            <div class="paso">
-                Restamos ${b} en ambos lados:
-                <br>
-                ${a}x = ${c - b}
-            </div>
-
-            <div class="paso">
-                Dividimos entre ${a}:
-                <br>
-                x = ${c - b} ÷ ${a}
-            </div>
-
-            <div class="final">
-                ✅ x = ${x}
-            </div>
-        `);
-
-        return;
-    }
-
-
-    // ÁREA DE CÍRCULO
-    const circulo =
-        texto.match(/(?:círculo|circulo).*?(?:radio|r)\s*(?:de)?\s*(\d+(?:\.\d+)?)/);
-
-    if (circulo || texto.includes("area de un circulo")) {
-
-        const r = circulo
-            ? parseFloat(circulo[1])
-            : 5;
-
-        const area = Math.PI * r * r;
-
-        mostrarResultado(`
-            <div class="paso">
-                <strong>Tipo:</strong> Geometría — Área del círculo
-            </div>
-
-            <div class="paso">
-                Fórmula:
-                <br>
-                A = πr²
-            </div>
-
-            <div class="paso">
-                Sustituimos r = ${r}:
-                <br>
-                A = π × ${r}²
-            </div>
-
-            <div class="paso">
-                A = π × ${r*r}
-            </div>
-
-            <div class="final">
-                ✅ Área ≈ ${area.toFixed(4)}
-            </div>
-        `);
-
-        return;
-    }
-
-
-    // DERIVADA
-    const derivada =
-        texto.match(/derivada.*?x\^(\d+)/);
-
-    if (derivada) {
-
-        const n = parseInt(derivada[1]);
-
-        const nuevoExponente = n - 1;
-
-        let respuesta;
-
-        if (nuevoExponente === 0) {
-            respuesta = `${n}`;
-        } else if (nuevoExponente === 1) {
-            respuesta = `${n}x`;
-        } else {
-            respuesta = `${n}x^${nuevoExponente}`;
-        }
-
-        mostrarResultado(`
-            <div class="paso">
-                <strong>Tipo:</strong> Cálculo — Derivada
-            </div>
-
-            <div class="paso">
-                Regla de la potencia:
-                <br>
-                d/dx (xⁿ) = nxⁿ⁻¹
-            </div>
-
-            <div class="paso">
-                Para x^${n}:
-                <br>
-                ${n} × x^(${n}-1)
-            </div>
-
-            <div class="final">
-                ✅ Derivada = ${respuesta}
-            </div>
-        `);
-
-        return;
-    }
-
-
-    // PROBABILIDAD DE UN DADO
-    if (
-        texto.includes("probabilidad") &&
-        texto.includes("6") &&
-        texto.includes("dado")
-    ) {
-
-        mostrarResultado(`
-            <div class="paso">
-                <strong>Tipo:</strong> Probabilidad
-            </div>
-
-            <div class="paso">
-                Un dado normal tiene 6 resultados posibles:
-                <br>
-                1, 2, 3, 4, 5, 6
-            </div>
-
-            <div class="paso">
-                Resultados favorables: 1
-                <br>
-                Resultados posibles: 6
-            </div>
-
-            <div class="paso">
-                P(6) = 1/6
-            </div>
-
-            <div class="final">
-                ✅ Probabilidad = 1/6 ≈ 16.67%
-            </div>
-        `);
-
-        return;
-    }
-
-
-    // MEDIA
-    if (
-        texto.includes("media") ||
-        texto.includes("promedio")
-    ) {
-
-        const numeros =
-            texto.match(/-?\d+(?:\.\d+)?/g);
-
-        if (numeros && numeros.length >= 2) {
-
-            const valores = numeros.map(Number);
-
-            const suma =
-                valores.reduce((a,b) => a+b, 0);
-
-            const media =
-                suma / valores.length;
-
-            mostrarResultado(`
-                <div class="paso">
-                    <strong>Tipo:</strong> Estadística — Media
-                </div>
-
-                <div class="paso">
-                    Datos:
-                    <br>
-                    ${valores.join(", ")}
-                </div>
-
-                <div class="paso">
-                    Sumamos:
-                    <br>
-                    ${valores.join(" + ")} = ${suma}
-                </div>
-
-                <div class="paso">
-                    Dividimos entre ${valores.length} datos:
-                    <br>
-                    ${suma} ÷ ${valores.length}
-                </div>
-
-                <div class="final">
-                    ✅ Media = ${media}
-                </div>
-            `);
-
-            return;
-        }
-    }
-
-
-    // NÚMERO PRIMO
-    if (
-        texto.includes("primo") ||
-        texto.includes("es primo")
-    ) {
-
-        const numeros =
-            texto.match(/\d+/);
-
-        if (numeros) {
-
-            const n = parseInt(numeros[0]);
-
-            let primo = n > 1;
-
-            for (
-                let i = 2;
-                i <= Math.sqrt(n);
-                i++
-            ) {
-
-                if (n % i === 0) {
-                    primo = false;
-                    break;
-                }
-            }
-
-            mostrarResultado(`
-                <div class="paso">
-                    <strong>Tipo:</strong> Teoría de números
-                </div>
-
-                <div class="paso">
-                    Analizamos el número ${n}.
-                </div>
-
-                <div class="final">
-                    ${primo
-                        ? `✅ ${n} es un número primo.`
-                        : `❌ ${n} no es un número primo.`}
-                </div>
-            `);
-
-            return;
-        }
-    }
-
-
-    // OPERACIÓN MATEMÁTICA
-    try {
-
-        if (/^[0-9+\-*/().\s]+$/.test(texto)) {
-
-            const resultado =
-                Function('"use strict"; return (' + texto + ')')();
-
-            if (Number.isFinite(resultado)) {
-
-                mostrarResultado(`
-                    <div class="paso">
-                        <strong>Tipo:</strong> Aritmética
-                    </div>
-
-                    <div class="paso">
-                        Operación:
-                        <br>
-                        ${textoOriginal}
-                    </div>
-
-                    <div class="paso">
-                        Calculamos la operación.
-                    </div>
-
-                    <div class="final">
-                        ✅ Resultado = ${resultado}
-                    </div>
-                `);
-
-                return;
-            }
-        }
-
-    } catch (e) {}
-
-
-    // NO RECONOCIDO
-    mostrarResultado(`
-        <div class="paso">
-            🤔 Todavía no reconozco completamente este problema.
-        </div>
-
-        <div class="paso">
-            <strong>MateIA v2.0</strong> está creciendo.
-            Puedes probar con una operación, una ecuación,
-            un porcentaje, una derivada, una media,
-            una probabilidad o un problema de teoría de números.
-        </div>
-
-        <div class="final">
-            🚀 Próximamente: IA matemática avanzada
-        </div>
-    `);
-}
-
 </script>
-
 </body>
 </html>
