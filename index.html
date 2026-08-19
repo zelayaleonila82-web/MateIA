@@ -1,1 +1,489 @@
-index.html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MateIA - Tu profesor de matemáticas</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #eef4ff, #ffffff);
+      color: #172033;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 38px;
+    }
+
+    header p {
+      margin: 10px 0 0;
+      font-size: 18px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #2563eb;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 15px;
+      border: 2px solid #dbe4f0;
+      border-radius: 15px;
+      font-size: 17px;
+      resize: vertical;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: #2563eb;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 14px 22px;
+      margin-top: 15px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #2563eb;
+      color: white;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .secondary {
+      background: #7c3aed;
+    }
+
+    .secondary:hover {
+      background: #6d28d9;
+    }
+
+    #respuesta {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background: #f1f5ff;
+      border-left: 5px solid #2563eb;
+      border-radius: 12px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    .ejemplos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .ejemplo {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      padding: 15px;
+      border-radius: 12px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .ejemplo:hover {
+      border-color: #2563eb;
+      background: #eff6ff;
+    }
+
+    .paso {
+      background: white;
+      border-left: 4px solid #7c3aed;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #64748b;
+    }
+
+    .estado {
+      text-align: center;
+      margin-top: 15px;
+      color: #16a34a;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 30px;
+      }
+
+      .container {
+        padding: 12px;
+      }
+
+      .card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🧠 MateIA</h1>
+  <p>Tu profesor de matemáticas con inteligencia artificial</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>👋 Hola, soy MateIA</h2>
+
+    <p>
+      Escribe un problema de matemáticas y te ayudaré
+      a resolverlo paso a paso.
+    </p>
+
+    <textarea
+      id="problema"
+      placeholder="Ejemplo: 25 + 37
+o: 3x + 5 = 20
+o: ¿Cuánto es el 20% de 150?"
+    ></textarea>
+
+    <button onclick="resolver()">
+      🧠 Resolver problema
+    </button>
+
+    <button class="secondary" onclick="limpiar()">
+      🗑️ Limpiar
+    </button>
+
+    <div id="respuesta"></div>
+  </div>
+
+  <div class="card">
+    <h2>📚 Prueba un ejemplo</h2>
+
+    <div class="ejemplos">
+
+      <div class="ejemplo" onclick="poner('25 + 37')">
+        ➕ 25 + 37
+      </div>
+
+      <div class="ejemplo" onclick="poner('100 - 35')">
+        ➖ 100 - 35
+      </div>
+
+      <div class="ejemplo" onclick="poner('12 * 8')">
+        ✖️ 12 × 8
+      </div>
+
+      <div class="ejemplo" onclick="poner('144 / 12')">
+        ➗ 144 ÷ 12
+      </div>
+
+      <div class="ejemplo" onclick="poner('3x + 5 = 20')">
+        📐 3x + 5 = 20
+      </div>
+
+      <div class="ejemplo" onclick="poner('20% de 150')">
+        💯 20% de 150
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🎯 ¿Qué puede hacer esta versión?</h2>
+
+    <div class="paso">
+      ✅ Resolver operaciones básicas
+    </div>
+
+    <div class="paso">
+      ✅ Resolver ecuaciones sencillas
+    </div>
+
+    <div class="paso">
+      ✅ Calcular porcentajes
+    </div>
+
+    <div class="paso">
+      ✅ Mostrar los pasos de la solución
+    </div>
+
+    <div class="paso">
+      🚀 Preparada para añadir una IA real
+    </div>
+  </div>
+
+  <div class="estado">
+    🟢 MateIA está funcionando
+  </div>
+
+</div>
+
+<footer>
+  MateIA © 2026 · Tu profesor de matemáticas
+</footer>
+
+
+<script>
+
+function poner(texto) {
+  document.getElementById("problema").value = texto;
+  resolver();
+}
+
+
+function limpiar() {
+  document.getElementById("problema").value = "";
+  document.getElementById("respuesta").style.display = "none";
+  document.getElementById("respuesta").innerHTML = "";
+}
+
+
+function resolver() {
+
+  const entrada = document
+    .getElementById("problema")
+    .value
+    .trim();
+
+  const respuesta = document.getElementById("respuesta");
+
+  if (!entrada) {
+    respuesta.style.display = "block";
+    respuesta.innerHTML =
+      "✏️ Escribe primero un problema de matemáticas.";
+    return;
+  }
+
+  let texto = entrada.toLowerCase();
+
+  /* =========================
+     PORCENTAJES
+     ========================= */
+
+  let porcentaje = texto.match(
+    /(\d+(?:\.\d+)?)\s*%\s*(?:de)\s*(\d+(?:\.\d+)?)/i
+  );
+
+  if (porcentaje) {
+
+    let p = parseFloat(porcentaje[1]);
+    let numero = parseFloat(porcentaje[2]);
+
+    let resultado = numero * p / 100;
+
+    respuesta.innerHTML = `
+      <h3>💯 Solución</h3>
+
+      <div class="paso">
+        <b>Paso 1:</b> Convertimos ${p}% a decimal.
+        <br>
+        ${p} ÷ 100 = ${p / 100}
+      </div>
+
+      <div class="paso">
+        <b>Paso 2:</b> Multiplicamos.
+        <br>
+        ${numero} × ${p / 100} = ${resultado}
+      </div>
+
+      <h3>🎉 Respuesta: ${resultado}</h3>
+    `;
+
+    respuesta.style.display = "block";
+    return;
+  }
+
+
+  /* =========================
+     ECUACIONES
+     ax + b = c
+     ========================= */
+
+  let ecuacion = texto.match(
+    /^([+-]?\d*\.?\d*)\s*x\s*([+-]\s*\d+(?:\.\d+)?)?\s*=\s*([+-]?\d+(?:\.\d+)?)$/
+  );
+
+  if (ecuacion) {
+
+    let aTexto = ecuacion[1];
+
+    if (aTexto === "" || aTexto === "+") {
+      aTexto = "1";
+    }
+
+    if (aTexto === "-") {
+      aTexto = "-1";
+    }
+
+    let a = parseFloat(aTexto);
+
+    let b = 0;
+
+    if (ecuacion[2]) {
+      b = parseFloat(
+        ecuacion[2].replace(/\s/g, "")
+      );
+    }
+
+    let c = parseFloat(ecuacion[3]);
+
+    let x = (c - b) / a;
+
+    respuesta.innerHTML = `
+      <h3>📐 Vamos a resolver la ecuación</h3>
+
+      <div class="paso">
+        <b>Ecuación:</b>
+        ${entrada}
+      </div>
+
+      <div class="paso">
+        <b>Paso 1:</b>
+        Pasamos el término independiente al otro lado.
+        <br>
+        ${a}x = ${c} ${b >= 0 ? "-" : "+"} ${Math.abs(b)}
+      </div>
+
+      <div class="paso">
+        <b>Paso 2:</b>
+        Dividimos entre ${a}.
+        <br>
+        x = ${x}
+      </div>
+
+      <h3>🎉 Respuesta: x = ${x}</h3>
+    `;
+
+    respuesta.style.display = "block";
+    return;
+  }
+
+
+  /* =========================
+     OPERACIONES MATEMÁTICAS
+     ========================= */
+
+  let operacion = entrada
+    .replace(/×/g, "*")
+    .replace(/÷/g, "/")
+    .replace(/,/g, ".")
+    .replace(/\s+/g, "");
+
+  if (/^[0-9+\-*/().]+$/.test(operacion)) {
+
+    try {
+
+      let resultado = Function(
+        '"use strict"; return (' + operacion + ')'
+      )();
+
+      respuesta.innerHTML = `
+        <h3>🧮 Resolución</h3>
+
+        <div class="paso">
+          <b>Operación:</b>
+          ${entrada}
+        </div>
+
+        <div class="paso">
+          <b>Calculamos:</b>
+          ${operacion}
+        </div>
+
+        <h3>🎉 Resultado: ${resultado}</h3>
+      `;
+
+      respuesta.style.display = "block";
+      return;
+
+    } catch (error) {
+      // Continúa para mostrar mensaje
+    }
+  }
+
+
+  /* =========================
+     RESPUESTA GENERAL
+     ========================= */
+
+  respuesta.innerHTML = `
+    <h3>🤔 MateIA necesita un poquito más de información</h3>
+
+    <p>
+      Todavía estoy aprendiendo a resolver ese tipo de problema.
+    </p>
+
+    <p>
+      Prueba, por ejemplo:
+    </p>
+
+    <div class="paso">
+      25 + 37
+    </div>
+
+    <div class="paso">
+      144 / 12
+    </div>
+
+    <div class="paso">
+      3x + 5 = 20
+    </div>
+
+    <div class="paso">
+      20% de 150
+    </div>
+
+    <p>
+      🚀 En las siguientes versiones podemos conectar
+      MateIA con una inteligencia artificial real.
+    </p>
+  `;
+
+  respuesta.style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
